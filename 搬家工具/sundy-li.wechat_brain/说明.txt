@@ -1,0 +1,6 @@
+如果没有安装bolter，执行一下命令安装：
+go get -u github.com/hasit/bolter
+go get -u github.com/codegangsta/cli
+
+先执行export.bat，将questions.data题库导出为a.txt
+再执行convert.py将a.txt并入data.db下

@@ -1,0 +1,2 @@
+对方题库命名为quizzes.json，请勿放置data.db，程序创建该数据库
+然后使用同步库功能合并两个data.db

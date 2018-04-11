@@ -1,0 +1,1 @@
+对方题库命名为qa.db，执行程序将qa.db并入data.db
