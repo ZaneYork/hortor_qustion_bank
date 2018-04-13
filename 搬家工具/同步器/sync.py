@@ -95,7 +95,7 @@ for log in log3:
         if log[0] in questions1.keys():
             if questions1[log[0]][5] is None or log[1] > questions1[log[0]][5]:
                 c.execute("UPDATE QUSTION set OPTION='%s',SCHOOL='%s',TYPE='%s',CONTRIBUTOR='%s' where QUIZ='%s';" %
-                      (question[1], question[2], question[3], replaceText(question[4]), replaceText(question[0])))
+                      (trans(replaceText(question[1])), question[2], question[3], replaceText(question[4]), replaceText(question[0])))
                 c.execute("INSERT INTO ACCESS_LOG (QUIZ,ACCESS_TIME,IS_EXISTS) VALUES ('%s','%s','%s');" %
                       (trans(replaceText(question[0])),log[1], 'True'))
                 count_update += 1
@@ -106,13 +106,14 @@ for log in log3:
     #        print("INSERT INTO QUSTION (QUIZ,OPTION,SCHOOL,TYPE,CONTRIBUTOR) VALUES ('%s','%s','%s','%s','%s');" %
     #              (trans(replaceText(question[0])), question[1], question[2], question[3], trans(replaceText(question[4]))))
             c.execute("INSERT INTO QUSTION (QUIZ,OPTION,SCHOOL,TYPE,CONTRIBUTOR) VALUES ('%s','%s','%s','%s','%s');" %
-                  (trans(replaceText(question[0])), question[1], question[2], question[3], trans(replaceText(question[4]))))
+                  (trans(replaceText(question[0])), trans(replaceText(question[1])), question[2], question[3], trans(replaceText(question[4]))))
             c.execute("INSERT INTO ACCESS_LOG (QUIZ,ACCESS_TIME,IS_EXISTS) VALUES ('%s','%s','%s');" %
                   (trans(replaceText(question[0])), log[1], 'False'))
-            questions1[log[0]]=(trans(replaceText(question[0])), question[1], question[2], question[3], trans(replaceText(question[4])),log[1])
+            questions1[log[0]]=(question[0], question[1], question[2], question[3], question[4], log[1])
             count_insert += 1
     except:
         print(log)
+        traceback.print_exc()
 conn.commit()
 print("Inserted:",count_insert)
 print("Updated:",count_update)
