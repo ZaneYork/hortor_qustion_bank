@@ -48,6 +48,9 @@ c = conn.cursor()
 conn2 = sqlite3.connect('data2.db')
 conn2.text_factory = text_decode
 c2 = conn2.cursor()
+c2.execute("delete from access_log where quiz not in (select quiz from qustion)")
+conn2.commit()
+
 cursor = c.execute("select QUIZ,ACCESS_TIME,IS_EXISTS from ACCESS_LOG")
 log1 = {}
 for row in cursor:
